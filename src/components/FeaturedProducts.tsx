@@ -1,11 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import ProductCard from './ProductCard';
 import ProductModal from './ProductModal';
 import { SAMPLE_PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
+
+
 
 interface FeaturedProductsProps {
   onRequestQuote: (productName: string) => void;
@@ -19,7 +22,9 @@ const CATEGORY_TABS = [
   { id: 'food-carts', label: 'Food Carts' },
   { id: 'food-vans', label: 'Food Vans' },
   { id: 'stainless-steel', label: 'Stainless Steel' },
+  { id: 'food-ice-cream-carts', label: 'Food & Ice Cream Carts' },
 ];
+
 
 export default function FeaturedProducts({
   onRequestQuote,
@@ -63,12 +68,20 @@ export default function FeaturedProducts({
             </p>
           </div>
 
-          <div className="mt-4 md:mt-0">
+          <div className="mt-4 md:mt-0 flex items-center gap-3">
             <span className="text-xs text-[#66716A]">
-              Showing <strong className="text-[#0B3D24]">{filteredProducts.length}</strong> fabricated designs
+              Showing <strong className="text-[#0B3D24]">{filteredProducts.length}</strong> designs
             </span>
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-1 text-xs font-bold text-[#16803C] hover:text-[#0B3D24] bg-white hover:bg-[#EAF5EC] px-3 py-1.5 rounded-lg border border-gray-200 transition-colors shadow-2xs"
+            >
+              <span>View All Catalogue</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
+
 
         {/* Category Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">

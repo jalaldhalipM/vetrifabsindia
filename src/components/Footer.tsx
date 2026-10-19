@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { MessageSquare, Phone, Mail, ArrowUp } from 'lucide-react';
-import { COMPANY_CONFIG, NAVIGATION_LINKS } from '@/data/company';
+import { COMPANY_CONFIG, NAVIGATION_LINKS, getWhatsAppEnquiryUrl } from '@/data/company';
 import { CATEGORIES } from '@/data/categories';
 
 export default function Footer() {
@@ -10,23 +11,15 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleNavClick = (href: string) => {
-    if (href.startsWith('#')) {
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <footer className="bg-[#0B3D24] text-white border-t border-emerald-950">
-      
       {/* Main Footer Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
           
           {/* Col 1: Brand & Bio (4 cols) */}
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-3 mb-4">
+            <Link href="/" className="flex items-center gap-3 mb-4 inline-flex">
               <div className="w-10 h-10 rounded-lg bg-[#16803C] text-white flex items-center justify-center font-bold text-xl border border-emerald-400/30">
                 VF
               </div>
@@ -38,7 +31,7 @@ export default function Footer() {
                   Custom Mobile Food Units
                 </span>
               </div>
-            </div>
+            </Link>
 
             <p className="text-xs sm:text-sm text-emerald-100/80 leading-relaxed mb-5">
               Manufacturer of customized food carts, mobile food trucks, high-roof food vans, and food-grade stainless-steel commercial setups based in Chennai, India.
@@ -61,16 +54,12 @@ export default function Footer() {
             <ul className="space-y-2 text-xs sm:text-sm">
               {NAVIGATION_LINKS.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick(link.href);
-                    }}
                     className="text-emerald-100/80 hover:text-white hover:underline transition-colors block py-0.5"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -84,29 +73,21 @@ export default function Footer() {
             <ul className="space-y-2 text-xs sm:text-sm">
               {CATEGORIES.map((cat) => (
                 <li key={cat.id}>
-                  <a
-                    href="#products"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick('#products');
-                    }}
+                  <Link
+                    href={`/products/${cat.slug}`}
                     className="text-emerald-100/80 hover:text-white transition-colors block py-0.5"
                   >
                     {cat.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
               <li>
-                <a
-                  href="#engineering"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('#engineering');
-                  }}
+                <Link
+                  href="/#engineering"
                   className="text-emerald-400 hover:text-white transition-colors block py-0.5 font-medium"
                 >
                   Exploded View Specs &rarr;
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -119,9 +100,7 @@ export default function Footer() {
             
             <div className="space-y-3 text-xs text-emerald-100/80">
               <a
-                href={`https://wa.me/${COMPANY_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                  'Hello Vetri Fabs India, I would like to enquire about your products.'
-                )}`}
+                href={getWhatsAppEnquiryUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-xl bg-[#16803C] hover:bg-[#136e34] text-white font-semibold flex items-center justify-center gap-2 transition-colors"
@@ -169,7 +148,6 @@ export default function Footer() {
         </div>
 
       </div>
-
     </footer>
   );
 }

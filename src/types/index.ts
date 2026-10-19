@@ -1,3 +1,7 @@
+export type PricingType = 'fixed' | 'starting' | 'quotation';
+export type PublicationStatus = 'published' | 'draft' | 'archived';
+export type AvailabilityStatus = 'made_to_order' | 'in_stock' | 'custom_fabrication';
+
 export interface Category {
   id: string;
   name: string;
@@ -7,6 +11,8 @@ export interface Category {
   examples: string[];
   featured: boolean;
   order_index: number;
+  seo_title?: string;
+  seo_description?: string;
 }
 
 export interface ProductSpecification {
@@ -16,19 +22,34 @@ export interface ProductSpecification {
 
 export interface Product {
   id: string;
-  title: string;
+  name: string;
+  title: string; // Alias for backward compatibility
   slug: string;
   category_id: string;
   category_name: string;
+  category_slug: string;
   short_description: string;
-  full_description?: string;
-  image_url: string;
-  gallery_urls?: string[];
+  full_description: string;
+  primary_image: string;
+  image_url: string; // Alias for backward compatibility
+  gallery_images: string[];
+  gallery_urls?: string[]; // Alias for backward compatibility
+  pricing_type: PricingType;
+  price?: number | null;
+  starting_price?: number | null;
+  unit?: string | null;
+  sku: string;
   specifications: ProductSpecification[];
   features: string[];
-  is_featured: boolean;
-  is_published: boolean; // Pre-configured for Supabase publication status
-  created_at?: string;
+  featured: boolean;
+  is_featured: boolean; // Alias for backward compatibility
+  publication_status: PublicationStatus;
+  is_published: boolean; // Alias for backward compatibility
+  availability_status: AvailabilityStatus;
+  seo_title?: string;
+  seo_description?: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface GalleryItem {
@@ -53,6 +74,8 @@ export interface EnquiryFormData {
   email?: string;
   productInterested: string;
   message: string;
+  city?: string;
+  vehiclePlatform?: string;
 }
 
 export interface CompanyConfig {
@@ -72,4 +95,13 @@ export interface CompanyConfig {
     isPlaceholder: boolean;
   };
   disclaimer: string;
+  pricingDisclaimer: string;
 }
+
+export interface ProductFilterOptions {
+  categorySlug?: string;
+  pricingType?: string;
+  searchQuery?: string;
+  sortBy?: 'featured' | 'name-asc' | 'name-desc' | 'price-asc' | 'price-desc';
+}
+

@@ -9,8 +9,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vetrifabsindia.com"),
   title: "Vetri Fabs India | Custom Food Carts, Trucks & Vans",
   description: "Explore customized food carts, food trucks, food vans, and stainless-steel food carts from Vetri Fabs India. Contact us to discuss your product requirements.",
+
   keywords: [
     "food carts India",
     "food truck manufacturer",

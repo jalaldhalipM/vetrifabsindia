@@ -1,216 +1,896 @@
-import { Product } from '@/types';
+import { Product, ProductFilterOptions } from '@/types';
 
 /**
- * Sample product catalogue using actual Vetri Fabs India manufactured units.
- * Note: Prices are omitted per B2B quotation requirements ("Request a Quote").
- * Designed to mirror future Supabase `products` table schema.
+ * Authentic Vetri Fabs India Product Catalogue
+ * Structured to seamlessly match the future Supabase `products` schema
+ * with Row Level Security and admin synchronization.
  */
 export const SAMPLE_PRODUCTS: Product[] = [
+  // 1. Food Trucks
   {
     id: 'tata-ace-food-truck',
+    name: 'Tata Ace Commercial Food Truck',
     title: 'Tata Ace Commercial Food Truck',
     slug: 'tata-ace-commercial-food-truck',
     category_id: 'food-trucks',
     category_name: 'Food Trucks',
+    category_slug: 'food-trucks',
     short_description: 'Customized commercial kitchen fabrication on Tata Ace HT chassis with high-roof body, aluminum checkered flooring, and hydraulic awnings.',
-    full_description: 'Engineered specifically for mobile restaurateurs, this commercial food truck conversion is built directly onto the sturdy Tata Ace HT platform. Features a custom high-roof insulated cargo box, aluminum checkered plate non-slip flooring, full food-grade stainless steel working counters, hydraulic side-opening service hatch with fold-out shelf, and integrated 230V commercial wiring.',
+    full_description: 'Engineered specifically for mobile restaurateurs and street-food ventures, this commercial food truck conversion is fabricated directly onto the sturdy Tata Ace HT platform. Features a custom high-roof insulated cargo box, heavy-duty aluminum checkered plate non-slip flooring, food-grade stainless steel working counters, hydraulic side-opening service hatch with fold-out shelf, and integrated 230V commercial wiring distribution.',
+    primary_image: '/images/products/tata-ace-food-truck.jpg',
     image_url: '/images/products/tata-ace-food-truck.jpg',
+    gallery_images: [
+      '/images/products/tata-ace-food-truck.jpg',
+      '/images/engineering/tata-ace-features-collage.jpg',
+      '/images/engineering/truck-kitchen-interior.jpg',
+      '/images/gallery/gallery-foodclup-red-truck.jpg',
+    ],
     gallery_urls: [
       '/images/products/tata-ace-food-truck.jpg',
       '/images/engineering/tata-ace-features-collage.jpg',
       '/images/engineering/truck-kitchen-interior.jpg',
-      '/images/gallery/gallery-foodclup-red-truck.jpg'
+      '/images/gallery/gallery-foodclup-red-truck.jpg',
     ],
+    pricing_type: 'starting',
+    price: null,
+    starting_price: 385000,
+    unit: 'per fabricated body',
+    sku: 'VF-FT-001',
     specifications: [
       { label: 'Chassis Compatibility', value: 'Tata Ace HT / Mega / Similar LCV' },
-      { label: 'Body Construction', value: 'MS Tubular Skeleton with GI / ACP Sheeting' },
+      { label: 'Body Framework', value: 'MS Tubular Skeleton with GI / ACP Sheeting' },
+      { label: 'Internal Headroom', value: '6 Feet 3 Inches Walk-in Clearance' },
       { label: 'Flooring', value: 'Heavy-Duty Aluminium Checkered Non-Slip Plate' },
-      { label: 'Countertops', value: 'Food-Grade Stainless Steel' },
+      { label: 'Countertops', value: 'Food-Grade 304 Stainless Steel' },
       { label: 'Canopy Support', value: 'Heavy-Duty Gas Springs / Hydraulic Struts' },
-      { label: 'Electrical', value: 'Recessed Ceiling LED Panels & Distribution Box' }
+      { label: 'Electrical System', value: '230V Concealed Distribution with MCB & LED' },
+      { label: 'Plumbing Provisions', value: 'Fresh & Waste Water Tank Brackets' },
     ],
     features: [
-      'Ergonomic walk-in standing headroom for 2-3 chefs',
-      'Hydraulic fold-up service flap with customer ordering ledge',
-      'Rear double-door entry with aluminum step',
-      'Provisions for exhaust hood, fresh water, and waste water tank'
+      'Ergonomic walk-in standing headroom for 2-3 chefs working simultaneously',
+      'Hydraulic fold-up service flap with stainless customer ordering ledge',
+      'Rear double-door entry with integrated fold-down aluminum step',
+      'Dedicated heat-insulated compartment for LPG gas cylinders',
+      'Provisions for high-velocity exhaust hood and fresh water plumbing',
     ],
+    featured: true,
     is_featured: true,
+    publication_status: 'published',
     is_published: true,
+    availability_status: 'custom_fabrication',
+    seo_title: 'Tata Ace Commercial Food Truck Fabrication | Vetri Fabs India',
+    seo_description: 'Custom heavy-duty food truck fabrication on Tata Ace HT chassis with high-roof body, stainless kitchen fitouts, and hydraulic flaps.',
     created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
   },
   {
+    id: 'pizza-grill-food-truck',
+    name: 'Woodfired Pizza & Grill Food Truck',
+    title: 'Woodfired Pizza & Grill Food Truck',
+    slug: 'woodfired-pizza-grill-food-truck',
+    category_id: 'food-trucks',
+    category_name: 'Food Trucks',
+    category_slug: 'food-trucks',
+    short_description: 'Custom commercial food truck with retractable rooftop billboard display, woodfired oven setup, striped awnings, and complete brand vinyl graphics.',
+    full_description: 'Purpose-built for gourmet pizza and live street grilling operations. Engineered with a retractable rooftop 3D illuminated billboard for maximum street visibility, a heat-insulated cooking section capable of safely supporting pizza ovens or tandoor stoves, classic striped awnings with hydraulic support, and durable commercial-grade vinyl wrap graphics.',
+    primary_image: '/images/products/pizza-grill-food-truck.jpg',
+    image_url: '/images/products/pizza-grill-food-truck.jpg',
+    gallery_images: [
+      '/images/products/pizza-grill-food-truck.jpg',
+      '/images/gallery/gallery-peacepoint-night.jpg',
+      '/images/engineering/truck-kitchen-interior.jpg',
+    ],
+    gallery_urls: [
+      '/images/products/pizza-grill-food-truck.jpg',
+      '/images/gallery/gallery-peacepoint-night.jpg',
+      '/images/engineering/truck-kitchen-interior.jpg',
+    ],
+    pricing_type: 'quotation',
+    price: null,
+    starting_price: null,
+    unit: 'custom configuration',
+    sku: 'VF-FT-002',
+    specifications: [
+      { label: 'Vehicle Platform', value: 'Commercial Mini-Truck Chassis (Tata Ace / Piaggio)' },
+      { label: 'Rooftop Sign', value: 'Foldable Hydraulic Marquee Billboard with LED' },
+      { label: 'Cooking Zone', value: 'Reinforced Heat-Insulated Ceramic & SS Deck' },
+      { label: 'Awnings', value: 'Waterproof Striped Fabric over Hydraulic Frame' },
+      { label: 'Exhaust System', value: 'Custom Roof Vent Flue with High CFM Blower' },
+      { label: 'Prep Counter', value: 'Refrigerated Saladette Cutout Ready' },
+    ],
+    features: [
+      'High-impact elevated rooftop signage visible over dense crowds',
+      'Stainless steel condiment trays and prep station included',
+      'External fold-down counter for customer service and billing',
+      'Dedicated safety compartment for dual commercial gas cylinders',
+    ],
+    featured: true,
+    is_featured: true,
+    publication_status: 'published',
+    is_published: true,
+    availability_status: 'custom_fabrication',
+    seo_title: 'Custom Pizza & Grill Food Truck Fabrication | Vetri Fabs India',
+    seo_description: 'High-visibility food truck conversions designed for pizza ovens, grills, and live outdoor cooking setups.',
+    created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
+  },
+  {
+    id: 'dear-moms-3-wheeler',
+    name: '3-Wheeler Auto-Rickshaw Food Truck',
+    title: '3-Wheeler Auto-Rickshaw Food Truck',
+    slug: '3-wheeler-auto-rickshaw-food-truck',
+    category_id: 'food-trucks',
+    category_name: 'Food Trucks',
+    category_slug: 'food-trucks',
+    short_description: 'Compact 3-wheeler auto chassis conversion with illuminated chef emblem, interior warming counter, and side service hatch.',
+    full_description: 'An agile, ultra-mobile solution fabricated onto a commercial 3-wheeler auto-rickshaw chassis (Bajaj Maxima / Piaggio Ape). Perfect for crowded market streets and corporate parks where large trucks cannot park. Features sleek black exterior coating, integrated backlit chef emblem, food-grade prep counter, and lockable storage drawers.',
+    primary_image: '/images/gallery/gallery-dearmoms-3wheeler.jpg',
+    image_url: '/images/gallery/gallery-dearmoms-3wheeler.jpg',
+    gallery_images: [
+      '/images/gallery/gallery-dearmoms-3wheeler.jpg',
+      '/images/products/tata-ace-food-truck.jpg',
+      '/images/gallery/gallery-the300-black-truck.jpg',
+    ],
+    gallery_urls: [
+      '/images/gallery/gallery-dearmoms-3wheeler.jpg',
+      '/images/products/tata-ace-food-truck.jpg',
+      '/images/gallery/gallery-the300-black-truck.jpg',
+    ],
+    pricing_type: 'starting',
+    price: null,
+    starting_price: 240000,
+    unit: 'per chassis fabrication',
+    sku: 'VF-FT-003',
+    specifications: [
+      { label: 'Compatible Chassis', value: 'Piaggio Ape Commercial / Bajaj Maxima Cargo' },
+      { label: 'Body Material', value: 'MS Tube Skeleton + Powder-Coated Metal Skin' },
+      { label: 'Service Access', value: 'Single Large Hydraulic Side Flap' },
+      { label: 'Countertops', value: 'SS 304 Food Grade Matt Finish' },
+      { label: 'Power Source', value: 'Dual Battery Inverter System + 230V Shore In' },
+    ],
+    features: [
+      'Extremely compact footprint for narrow streets and dense urban footpaths',
+      'Low fuel & operating expenses compared to 4-wheeler trucks',
+      'Illuminated 3D front brand fascia for standout night appearance',
+      'Quick setup time — unlock awning and begin serving in 2 minutes',
+    ],
+    featured: false,
+    is_featured: false,
+    publication_status: 'published',
+    is_published: true,
+    availability_status: 'custom_fabrication',
+    seo_title: '3-Wheeler Auto Food Truck Fabrication | Vetri Fabs India',
+    seo_description: 'Custom commercial 3-wheeler auto rickshaw mobile food conversions for tea, snacks, and street food vending.',
+    created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
+  },
+  {
+    id: 'the-300-heavy-duty-truck',
+    name: 'The 300 Heavy-Duty Commercial Food Truck',
+    title: 'The 300 Heavy-Duty Commercial Food Truck',
+    slug: 'the-300-heavy-duty-commercial-food-truck',
+    category_id: 'food-trucks',
+    category_name: 'Food Trucks',
+    category_slug: 'food-trucks',
+    short_description: 'High-volume commercial food truck body with extra-tall roof box, full exterior branding wrap, and dual prep zones.',
+    full_description: 'Built for high-volume commercial catering and multi-cuisine restaurant operations. Features a custom-stretched vehicle box, reinforced rooftop storage rack, 360-degree vinyl graphic wrapping, dual kitchen prep zones with separate fry and beverage stations, and dual high-velocity roof turbine ventilators.',
+    primary_image: '/images/gallery/gallery-the300-black-truck.jpg',
+    image_url: '/images/gallery/gallery-the300-black-truck.jpg',
+    gallery_images: [
+      '/images/gallery/gallery-the300-black-truck.jpg',
+      '/images/gallery/gallery-peacepoint-night.jpg',
+      '/images/engineering/tata-ace-features-collage.jpg',
+    ],
+    gallery_urls: [
+      '/images/gallery/gallery-the300-black-truck.jpg',
+      '/images/gallery/gallery-peacepoint-night.jpg',
+      '/images/engineering/tata-ace-features-collage.jpg',
+    ],
+    pricing_type: 'starting',
+    price: null,
+    starting_price: 420000,
+    unit: 'per complete body build',
+    sku: 'VF-FT-004',
+    specifications: [
+      { label: 'Vehicle Platform', value: 'Tata Ace Mega / Mahindra Bolero Maxi Truck' },
+      { label: 'Box Dimensions', value: '9.5 Ft Length x 5.5 Ft Width x 6.5 Ft Height' },
+      { label: 'Wall Insulation', value: 'Glass Wool Heat & Acoustic Insulation' },
+      { label: 'Flooring', value: 'Chequered Aluminium Diamond Plate' },
+      { label: 'Exhaust', value: 'Twin Commercial Exhaust Blowers (1200 CFM)' },
+    ],
+    features: [
+      'Twin preparation lines allow serving fast food & beverages concurrently',
+      'Heavy-duty floor load rating supporting tandoors and deep fat fryers',
+      'Weather-sealed hydraulic gas springs on all access windows',
+    ],
+    featured: false,
+    is_featured: false,
+    publication_status: 'published',
+    is_published: true,
+    availability_status: 'custom_fabrication',
+    seo_title: 'Heavy-Duty Commercial Food Truck Fabrication | Vetri Fabs India',
+    seo_description: 'Premium food truck body fabrication on Tata Ace and Mahindra Bolero platforms with complete kitchen customization.',
+    created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
+  },
+
+  // 2. Food Carts
+  {
     id: 'illuminated-kiosk-cart',
+    name: 'Illuminated Kiosk Food Cart (Crush Series)',
     title: 'Illuminated Kiosk Food Cart (Crush Series)',
     slug: 'illuminated-kiosk-food-cart-crush',
     category_id: 'food-carts',
     category_name: 'Food Carts',
+    category_slug: 'food-carts',
     short_description: 'Modern mobile food kiosk cart with front 3D illuminated branding, perimeter warm-white LED contours, and hydraulic awnings.',
     full_description: 'A signature Vetri Fabs manufacturing design featuring rich wooden-finish textured panels accented by warm-white ambient LED perimeter strips. Built with a heavy MS pipe framework, upper illuminated marquee sign, 3-sided hydraulic folding canopies for all-weather protection, and smooth-glide industrial caster wheels for effortless repositioning.',
+    primary_image: '/images/products/illuminated-kiosk-cart.jpg',
     image_url: '/images/products/illuminated-kiosk-cart.jpg',
+    gallery_images: [
+      '/images/products/illuminated-kiosk-cart.jpg',
+      '/images/hero/hero-food-cart-kiosk.jpg',
+      '/images/gallery/gallery-loop-neon-cart.jpg',
+      '/images/gallery/gallery-yellow-kiosk.jpg',
+    ],
     gallery_urls: [
       '/images/products/illuminated-kiosk-cart.jpg',
       '/images/hero/hero-food-cart-kiosk.jpg',
-      '/images/gallery/gallery-loop-neon-cart.jpg'
+      '/images/gallery/gallery-loop-neon-cart.jpg',
+      '/images/gallery/gallery-yellow-kiosk.jpg',
     ],
+    pricing_type: 'starting',
+    price: null,
+    starting_price: 110000,
+    unit: 'per kiosk cart',
+    sku: 'VF-FC-101',
     specifications: [
-      { label: 'Frame Material', value: 'MS Heavy-Gauge Square Pipe' },
-      { label: 'Exterior Panel', value: 'Wood-Textured ACP / Acrylic with LED' },
-      { label: 'Lighting', value: 'Warm White LED Contour + Backlit 3D Logo' },
-      { label: 'Awnings', value: 'Triple Gas Spring Assisted Flaps' },
-      { label: 'Wheels', value: 'Industrial Heavy-Duty Casters with Locks' }
+      { label: 'Overall Dimensions', value: '7 Ft Length x 4 Ft Width x 7 Ft Height' },
+      { label: 'Frame Material', value: 'MS Heavy-Gauge Square Tubular Pipe' },
+      { label: 'Exterior Paneling', value: 'Wood-Textured ACP / Acrylic with LED' },
+      { label: 'Lighting Package', value: 'Warm White LED Contour + Backlit 3D Logo' },
+      { label: 'Awnings System', value: 'Triple Gas Spring Assisted Lift Flaps' },
+      { label: 'Wheels & Casters', value: '4 Heavy-Duty Industrial Swivel Casters with Brakes' },
     ],
     features: [
-      'High-impact illuminated signage for evening and night sales',
-      'Dual preparation shelves and under-counter lockable storage',
-      'Weather-resistant GI metal roof with water runoff slope',
-      'Concealed internal wiring with master switch control'
+      'High-impact illuminated signage for evening and night market sales',
+      'Dual preparation shelves and under-counter lockable storage cabinets',
+      'Weather-resistant GI metal roof with integrated water runoff slope',
+      'Concealed internal electrical wiring with master MCB safety switch',
     ],
+    featured: true,
     is_featured: true,
+    publication_status: 'published',
     is_published: true,
+    availability_status: 'made_to_order',
+    seo_title: 'Illuminated Mobile Kiosk Food Cart | Vetri Fabs India',
+    seo_description: 'Custom illuminated kiosk food cart with wood-texture panels, 3D neon branding, and hydraulic canopies.',
     created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
   },
   {
     id: 'green-mobile-cart',
-    title: 'Green Mobile Street Food Cart (Hen’s Crave)',
+    name: 'Green Mobile Street Food Cart',
+    title: 'Green Mobile Street Food Cart',
     slug: 'green-mobile-street-food-cart',
     category_id: 'food-carts',
     category_name: 'Food Carts',
+    category_slug: 'food-carts',
     short_description: 'Durable corrugated industrial body food cart finished in brand green, complete with exhaust fan, shelves, and hydraulic flaps.',
-    full_description: 'Finished in durable industrial powder-coated green to match bold branding. This cart features corrugated container-style lower paneling, integrated heavy-duty exhaust ventilation fan, internal tiered spice and prep racks, ceiling downlights, and rugged transport wheels designed for both indoor mall and outdoor street environments.',
+    full_description: 'Finished in durable industrial powder-coated green to match bold restaurant branding. This cart features corrugated container-style lower paneling, integrated heavy-duty exhaust ventilation fan, internal tiered spice and prep racks, ceiling downlights, and rugged transport wheels designed for both indoor mall and outdoor street environments.',
+    primary_image: '/images/products/green-mobile-cart.jpg',
     image_url: '/images/products/green-mobile-cart.jpg',
+    gallery_images: [
+      '/images/products/green-mobile-cart.jpg',
+      '/images/categories/cat-food-carts.jpg',
+      '/images/gallery/gallery-salem-snacks.jpg',
+    ],
     gallery_urls: [
       '/images/products/green-mobile-cart.jpg',
-      '/images/categories/cat-food-carts.jpg'
+      '/images/categories/cat-food-carts.jpg',
+      '/images/gallery/gallery-salem-snacks.jpg',
     ],
+    pricing_type: 'fixed',
+    price: 95000,
+    starting_price: null,
+    unit: 'per cart',
+    sku: 'VF-FC-102',
     specifications: [
-      { label: 'Body Type', value: 'Corrugated Steel Container Panel (Green Finish)' },
+      { label: 'Cart Dimensions', value: '6 Ft Length x 3.5 Ft Width x 6.8 Ft Height' },
+      { label: 'Body Construction', value: 'Corrugated Steel Container Panel (Green Finish)' },
       { label: 'Ventilation', value: 'Integrated High-Velocity Exhaust Fan' },
       { label: 'Lighting', value: 'Downlight Spotlights + Halo Rim LED' },
-      { label: 'Canopy', value: 'Heavy Hydraulic Gas Struts on Three Sides' },
-      { label: 'Base', value: 'Reinforced Chassis with Solid Rubber Wheels' }
+      { label: 'Canopy Flaps', value: 'Heavy Hydraulic Gas Struts on Three Sides' },
+      { label: 'Mobility Base', value: 'Solid Rubber Industrial Wheels with Push Bar' },
     ],
     features: [
-      'Optimal ventilation prevents heat buildup during frying/grilling',
-      'Built-in modular shelves for food packaging and ingredients',
-      'Wide front preparation counter with hygienic wipe-clean finish',
-      'Sturdy push/pull towing handles'
+      'High-velocity exhaust fan prevents heat buildup during frying & grilling',
+      'Built-in modular shelves for food packaging, containers, and ingredients',
+      'Wide front preparation counter with hygienic food-grade wipe-clean finish',
+      'Sturdy heavy-duty push and pull towing handles',
     ],
+    featured: true,
     is_featured: true,
+    publication_status: 'published',
     is_published: true,
+    availability_status: 'made_to_order',
+    seo_title: 'Green Corrugated Street Food Cart | Vetri Fabs India',
+    seo_description: 'Heavy-duty corrugated metal street food cart with built-in exhaust fan, hydraulic awnings, and LED spotlights.',
     created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
   },
   {
-    id: 'ss-coffee-cart',
-    title: 'Commercial SS Coffee & Prep Cart (AD 800)',
-    slug: 'commercial-stainless-steel-coffee-cart',
-    category_id: 'stainless-steel',
-    category_name: 'Stainless Steel & Specialty Carts',
-    short_description: 'Food-grade stainless steel working counter cart with lockable double cabinets, water sink tap, roller blinds, and canopy.',
-    full_description: 'Built for high-volume coffee, beverage, and specialty food operations. Features an expansive food-grade stainless steel preparation surface with protective wrap, twin polished upright tubular supports, protective roller blinds for lock-and-leave convenience, lower storage doors with safety hasps, and integrated water sink plumbing.',
-    image_url: '/images/products/ss-coffee-cart.jpg',
-    gallery_urls: [
-      '/images/products/ss-coffee-cart.jpg',
-      '/images/categories/cat-stainless-steel.jpg'
+    id: 'bombay-vadapav-wooden-cart',
+    name: 'Big Bombay Vada Pav (8x4) Wood-Slat Cart',
+    title: 'Big Bombay Vada Pav (8x4) Wood-Slat Cart',
+    slug: 'bombay-vadapav-wooden-slat-cart',
+    category_id: 'food-carts',
+    category_name: 'Food Carts',
+    category_slug: 'food-carts',
+    short_description: 'Handcrafted vertical wooden slat paneling with dual hydraulic serving hatches, stove cutout, and heavy solid axle wheels.',
+    full_description: 'A rustic, artisanal wooden-slat cart handcrafted for authentic street food, vada pav, chaat, and snack operations. Measuring 8 ft by 4 ft, it provides massive interior counter real estate, dual stainless steel gas burner cutouts, a high roof with deep eaves, and decorative pendant bulb fixtures.',
+    primary_image: '/images/gallery/gallery-bombay-vadapav.jpg',
+    image_url: '/images/gallery/gallery-bombay-vadapav.jpg',
+    gallery_images: [
+      '/images/gallery/gallery-bombay-vadapav.jpg',
+      '/images/products/illuminated-kiosk-cart.jpg',
+      '/images/gallery/gallery-salem-snacks.jpg',
     ],
+    gallery_urls: [
+      '/images/gallery/gallery-bombay-vadapav.jpg',
+      '/images/products/illuminated-kiosk-cart.jpg',
+      '/images/gallery/gallery-salem-snacks.jpg',
+    ],
+    pricing_type: 'fixed',
+    price: 125000,
+    starting_price: null,
+    unit: 'per 8x4 custom unit',
+    sku: 'VF-FC-103',
     specifications: [
-      { label: 'Counter Material', value: 'Food-Grade Stainless Steel (Mirror/Matt)' },
-      { label: 'Pillars', value: 'Heavy Stainless Steel Tubular Uprights' },
-      { label: 'Security', value: 'Roller Blinds + Lockable Under-Cabinet Doors' },
-      { label: 'Plumbing', value: 'Stainless Sink with Goose-Neck Tap Provision' },
-      { label: 'Wheels', value: 'Heavy-Duty Industrial Tires with Mudguards' }
+      { label: 'Dimensions', value: '8 Ft Length x 4 Ft Width x 7.2 Ft Height' },
+      { label: 'Exterior Cladding', value: 'Treated Hardwood Vertical Slats + Waterproof Seal' },
+      { label: 'Work Surface', value: '304 Stainless Steel with Dual Burner Recesses' },
+      { label: 'Canopy', value: 'Twin Hydraulic Up-Folding Wings' },
+      { label: 'Running Gear', value: 'Solid Steel Axle with Pneumatic Tires' },
     ],
     features: [
-      'Hygienic, corrosion-resistant stainless steel work surfaces',
-      'Upper canopy signage fascia with custom brand lettering',
-      'Under-counter storage for water containers, supplies, and dairy',
-      'Sturdy fender mudguards over all four wheels'
+      'Artisanal wooden aesthetic creates strong brand appeal and footfall',
+      'Extra-wide 8-foot frontage allows two staff members to take orders simultaneously',
+      'Lockable sliding cabinet doors on the rear operator side',
     ],
-    is_featured: true,
+    featured: false,
+    is_featured: false,
+    publication_status: 'published',
     is_published: true,
+    availability_status: 'made_to_order',
+    seo_title: '8x4 Wood-Slat Food Cart Fabrication | Vetri Fabs India',
+    seo_description: 'Custom handcrafted 8x4 wooden food cart with dual hydraulic hatches, stove cutouts, and stainless preparation counters.',
     created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
   },
+  {
+    id: 'salem-snacks-hydraulic-cart',
+    name: 'Salem Snacks 3-Way Hydraulic Food Cart',
+    title: 'Salem Snacks 3-Way Hydraulic Food Cart',
+    slug: 'salem-snacks-3-way-hydraulic-cart',
+    category_id: 'food-carts',
+    category_name: 'Food Carts',
+    category_slug: 'food-carts',
+    short_description: 'Vibrant yellow fast-food cart with triple hydraulic canopies providing 270-degree customer ordering access and LED contouring.',
+    full_description: 'Engineered for high-volume corner locations, this model features three independent gas-strut-assisted canopies opening to front, left, and right. Provides total 270-degree customer interaction, vibrant yellow powder coating, and a heavy-duty stainless prep counter with deep storage bays underneath.',
+    primary_image: '/images/gallery/gallery-salem-snacks.jpg',
+    image_url: '/images/gallery/gallery-salem-snacks.jpg',
+    gallery_images: [
+      '/images/gallery/gallery-salem-snacks.jpg',
+      '/images/gallery/gallery-yellow-kiosk.jpg',
+      '/images/categories/cat-food-carts.jpg',
+    ],
+    gallery_urls: [
+      '/images/gallery/gallery-salem-snacks.jpg',
+      '/images/gallery/gallery-yellow-kiosk.jpg',
+      '/images/categories/cat-food-carts.jpg',
+    ],
+    pricing_type: 'starting',
+    price: null,
+    starting_price: 105000,
+    unit: 'per cart',
+    sku: 'VF-FC-104',
+    specifications: [
+      { label: 'Size', value: '6.5 Ft Length x 4 Ft Width x 7 Ft Height' },
+      { label: 'Canopy System', value: '3-Way Independent Hydraulic Gas Springs' },
+      { label: 'Finish', value: 'Automotive Yellow Gloss Powder Coating' },
+      { label: 'Counters', value: 'Seamless SS 304 Food-Grade Surface' },
+      { label: 'Lighting', value: 'Concealed LED Strip Contours + Downlights' },
+    ],
+    features: [
+      '270-degree customer serving angle maximizes queue throughput',
+      'Gas springs ensure smooth and effortless opening and closing',
+      'Integrated heavy-duty padlocking brackets for overnight security',
+    ],
+    featured: false,
+    is_featured: false,
+    publication_status: 'published',
+    is_published: true,
+    availability_status: 'made_to_order',
+    seo_title: '3-Way Hydraulic Opening Food Cart | Vetri Fabs India',
+    seo_description: 'Tri-fold hydraulic mobile food cart designed for 270-degree customer ordering in busy market places.',
+    created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
+  },
+  {
+    id: 'yellow-kiosk-push-cart',
+    name: 'Yellow Mobile Food Kiosk Push Cart',
+    title: 'Yellow Mobile Food Kiosk Push Cart',
+    slug: 'yellow-mobile-food-kiosk-push-cart',
+    category_id: 'food-carts',
+    category_name: 'Food Carts',
+    category_slug: 'food-carts',
+    short_description: 'Bright powder-coated push cart kiosk with upper display shelf, lockable lower storage, and folding service wings.',
+    full_description: 'A compact and versatile street food cart finished in cheerful yellow. Includes folding side wing tables to increase working area when parked, an elevated upper glass or acrylic shelf for displaying baked items and snacks, and smooth-rolling solid wheels.',
+    primary_image: '/images/gallery/gallery-yellow-kiosk.jpg',
+    image_url: '/images/gallery/gallery-yellow-kiosk.jpg',
+    gallery_images: [
+      '/images/gallery/gallery-yellow-kiosk.jpg',
+      '/images/gallery/gallery-salem-snacks.jpg',
+      '/images/categories/cat-food-carts.jpg',
+    ],
+    gallery_urls: [
+      '/images/gallery/gallery-yellow-kiosk.jpg',
+      '/images/gallery/gallery-salem-snacks.jpg',
+      '/images/categories/cat-food-carts.jpg',
+    ],
+    pricing_type: 'fixed',
+    price: 85000,
+    starting_price: null,
+    unit: 'per cart',
+    sku: 'VF-FC-105',
+    specifications: [
+      { label: 'Dimensions', value: '5 Ft Length x 3 Ft Width x 6.5 Ft Height' },
+      { label: 'Material', value: 'MS Tube Skeleton + Powder-Coated GI Sheets' },
+      { label: 'Storage', value: 'Twin Rear Sliding Doors with Key Lock' },
+      { label: 'Wings', value: 'Dual Fold-Down Side Extension Shelves' },
+    ],
+    features: [
+      'Lightweight and easily pushed by a single vendor',
+      'Fold-out side tables provide 40% additional preparation area',
+      'Upper display shelf protected from sun and rain by curved metal roof',
+    ],
+    featured: false,
+    is_featured: false,
+    publication_status: 'published',
+    is_published: true,
+    availability_status: 'in_stock',
+    seo_title: 'Yellow Street Food Kiosk Push Cart | Vetri Fabs India',
+    seo_description: 'Compact mobile push cart with folding wings, upper display shelves, and lockable storage.',
+    created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
+  },
+
+  // 3. Food Vans
   {
     id: 'mobile-food-van-10x6',
-    title: 'Custom 10x6 Mobile Food Van / Kiosk (Shaw Teay)',
+    name: 'Custom 10x6 Mobile Food Van / Kiosk',
+    title: 'Custom 10x6 Mobile Food Van / Kiosk',
     slug: 'custom-mobile-food-van-10x6',
     category_id: 'food-vans',
     category_name: 'Food Vans',
+    category_slug: 'food-vans',
     short_description: 'High-capacity 10x6 mobile food van featuring dual service windows, scalloped canopy trim, interior workstation, and perimeter LED contouring.',
     full_description: 'An expansive 10 ft by 6 ft enclosed mobile food van built for high-throughput beverage, tea, and fast-food businesses. Boasts dual service windows with sliding shutters, scalloped decorative roof molding, 360-degree yellow LED perimeter contouring, and a full walk-in interior with granite/stainless counters and overhead storage.',
+    primary_image: '/images/products/mobile-food-van-10x6.jpg',
     image_url: '/images/products/mobile-food-van-10x6.jpg',
+    gallery_images: [
+      '/images/products/mobile-food-van-10x6.jpg',
+      '/images/gallery/gallery-highroof-interior.jpg',
+      '/images/engineering/craftsmen-fabrication.jpg',
+      '/images/categories/cat-food-vans.jpg',
+    ],
     gallery_urls: [
       '/images/products/mobile-food-van-10x6.jpg',
       '/images/gallery/gallery-highroof-interior.jpg',
-      '/images/engineering/craftsmen-fabrication.jpg'
+      '/images/engineering/craftsmen-fabrication.jpg',
+      '/images/categories/cat-food-vans.jpg',
     ],
+    pricing_type: 'starting',
+    price: null,
+    starting_price: 295000,
+    unit: 'per 10x6 mobile van',
+    sku: 'VF-FV-201',
     specifications: [
       { label: 'Dimensions', value: '10 Feet Length x 6 Feet Width x 8.5 Feet Height' },
       { label: 'Structure', value: 'Insulated Metal Sandwich Panel Body' },
       { label: 'Windows', value: 'Dual Service Shutters with Counter Ledges' },
       { label: 'Lighting', value: 'Rooftop 3D Neon Signage Provision + LED Contours' },
-      { label: 'Running Gear', value: 'Heavy Solid Axle with Off-Road Capable Tires' }
+      { label: 'Running Gear', value: 'Heavy Solid Axle with Off-Road Capable Tires' },
+      { label: 'Tow System', value: 'Heavy-Duty Tow Hitch Coupler with Jockey Wheel' },
     ],
     features: [
-      'Accommodates 2 to 4 staff members working simultaneously',
-      'Dual-window setup allows separate Ordering and Pickup points',
+      'Accommodates 2 to 4 staff members working simultaneously inside',
+      'Dual-window setup allows separate Ordering and Pickup points for faster service',
       'Insulated walls maintain comfortable internal working temperatures',
-      'Full electrical wiring harness for blenders, fryers, and tea boilers'
+      'Full electrical wiring harness for blenders, fryers, and tea boilers',
     ],
+    featured: true,
     is_featured: true,
+    publication_status: 'published',
     is_published: true,
+    availability_status: 'custom_fabrication',
+    seo_title: '10x6 Enclosed Mobile Food Van Kiosk | Vetri Fabs India',
+    seo_description: 'Custom fabricated 10x6 mobile food van with dual service shutters, walk-in interior, and heavy tow axle.',
     created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
   },
   {
-    id: 'pizza-grill-food-truck',
-    title: 'Woodfired Pizza & Grill Food Truck (Mizter Pizza)',
-    slug: 'woodfired-pizza-grill-food-truck',
-    category_id: 'food-trucks',
-    category_name: 'Food Trucks',
-    short_description: 'Custom commercial food truck with retractable rooftop billboard display, woodfired oven setup, striped awnings, and complete brand vinyl graphics.',
-    full_description: 'Purpose-built for gourmet pizza and live street grilling. Engineered with a retractable rooftop 3D illuminated billboard for maximum street visibility, heat-insulated cooking section capable of holding pizza ovens or tandoor stoves, classic striped awnings with hydraulic support, and durable commercial vinyl graphics.',
-    image_url: '/images/products/pizza-grill-food-truck.jpg',
-    gallery_urls: [
-      '/images/products/pizza-grill-food-truck.jpg',
-      '/images/gallery/gallery-peacepoint-night.jpg',
-      '/images/engineering/truck-kitchen-interior.jpg'
+    id: 'walk-in-high-roof-van',
+    name: 'Walk-In High-Roof Food Van Kitchen',
+    title: 'Walk-In High-Roof Food Van Kitchen',
+    slug: 'walk-in-high-roof-food-van-kitchen',
+    category_id: 'food-vans',
+    category_name: 'Food Vans',
+    category_slug: 'food-vans',
+    short_description: 'Full interior fitment featuring wood-finish wall panels, granite/SS preparation counters, under-counter storage, and LED ceiling fixtures.',
+    full_description: 'State-of-the-art enclosed mobile kitchen architecture. Built with ergonomic 6.8 ft ceiling clearance, sound and thermal insulation, customized wall-mounted stainless shelving, dedicated heavy appliance wiring circuits, and commercial ventilation exhaust flues.',
+    primary_image: '/images/gallery/gallery-highroof-interior.jpg',
+    image_url: '/images/gallery/gallery-highroof-interior.jpg',
+    gallery_images: [
+      '/images/gallery/gallery-highroof-interior.jpg',
+      '/images/products/mobile-food-van-10x6.jpg',
+      '/images/engineering/craftsmen-fabrication.jpg',
     ],
+    gallery_urls: [
+      '/images/gallery/gallery-highroof-interior.jpg',
+      '/images/products/mobile-food-van-10x6.jpg',
+      '/images/engineering/craftsmen-fabrication.jpg',
+    ],
+    pricing_type: 'quotation',
+    price: null,
+    starting_price: null,
+    unit: 'custom walk-in build',
+    sku: 'VF-FV-202',
     specifications: [
-      { label: 'Vehicle Platform', value: 'Commercial Mini-Truck Chassis (Tata Ace / Piaggio)' },
-      { label: 'Rooftop Sign', value: 'Foldable Hydraulic Marquee Billboard' },
-      { label: 'Cooking Zone', value: 'Reinforced Heat-Insulated Stainless Steel Deck' },
-      { label: 'Canopy', value: 'Waterproof Striped Fabric over Hydraulic Frame' },
-      { label: 'Exhaust', value: 'Custom Roof Vent Flue Provision' }
+      { label: 'Standing Headroom', value: '6.8 Feet Walk-in Clearance' },
+      { label: 'Interior Walls', value: 'Decorative Wipe-Clean Wood-Grain Acoustic Panels' },
+      { label: 'Worktops', value: 'Granite & Food-Grade SS 304 Hybrid Counters' },
+      { label: 'Flooring', value: 'Industrial Anti-Slip Vinyl over Aluminum Deck' },
+      { label: 'Electrical', value: 'Multiple 16A Commercial Sockets with Dedicated Breakers' },
     ],
     features: [
-      'High-impact elevated rooftop signage visible over crowds',
-      'Stainless steel condiment trays and prep station included',
-      'External fold-down counter for customer service',
-      'Dedicated safety compartment for dual commercial gas cylinders'
+      'Unsurpassed comfort for full culinary teams during long shifts',
+      'Integrated sink unit with automated foot-switch water pump',
+      'Overhead storage cabinets prevent clutter on preparation counters',
     ],
-    is_featured: true,
+    featured: false,
+    is_featured: false,
+    publication_status: 'published',
     is_published: true,
+    availability_status: 'custom_fabrication',
+    seo_title: 'Walk-In High-Roof Food Van Kitchen Fitout | Vetri Fabs India',
+    seo_description: 'Professional high-roof walk-in mobile kitchen fitments with wood-finish panels and commercial countertops.',
     created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
+  },
+
+  // 4. Stainless Steel & Specialty Carts
+  {
+    id: 'commercial-ss-coffee-cart',
+    name: 'Commercial SS Coffee & Beverage Cart (AD 800)',
+    title: 'Commercial SS Coffee & Beverage Cart (AD 800)',
+    slug: 'commercial-stainless-steel-coffee-cart',
+    category_id: 'stainless-steel',
+    category_name: 'Stainless Steel & Specialty Carts',
+    category_slug: 'stainless-steel',
+    short_description: 'Food-grade stainless steel working counter cart with lockable double cabinets, water sink tap, roller blinds, and canopy.',
+    full_description: 'Built for high-volume coffee, beverage, and specialty food operations. Features an expansive food-grade stainless steel preparation surface with protective wrap, twin polished upright tubular supports, protective roller blinds for lock-and-leave convenience, lower storage doors with safety hasps, and integrated water sink plumbing.',
+    primary_image: '/images/products/ss-coffee-cart.jpg',
+    image_url: '/images/products/ss-coffee-cart.jpg',
+    gallery_images: [
+      '/images/products/ss-coffee-cart.jpg',
+      '/images/categories/cat-stainless-steel.jpg',
+      '/images/gallery/gallery-live-table-banquet.jpg',
+    ],
+    gallery_urls: [
+      '/images/products/ss-coffee-cart.jpg',
+      '/images/categories/cat-stainless-steel.jpg',
+      '/images/gallery/gallery-live-table-banquet.jpg',
+    ],
+    pricing_type: 'fixed',
+    price: 145000,
+    starting_price: null,
+    unit: 'per cart',
+    sku: 'VF-SS-301',
+    specifications: [
+      { label: 'Counter Material', value: 'Food-Grade 304 Stainless Steel (Mirror/Matt)' },
+      { label: 'Pillars', value: 'Heavy Stainless Steel Tubular Uprights' },
+      { label: 'Security Blinds', value: 'Lockable Aluminum Roller Blinds' },
+      { label: 'Plumbing', value: 'Stainless Sink with Goose-Neck Tap Provision' },
+      { label: 'Wheels', value: 'Heavy-Duty Industrial Tires with Mudguards' },
+      { label: 'Overall Dimensions', value: '6 Ft Length x 3 Ft Width x 6.8 Ft Height' },
+    ],
+    features: [
+      'Hygienic, corrosion-resistant stainless steel work surfaces',
+      'Upper canopy signage fascia with custom laser-cut brand lettering',
+      'Under-counter storage for espresso machines, water cans, and dairy supplies',
+      'Sturdy fender mudguards over all four transport wheels',
+    ],
+    featured: true,
+    is_featured: true,
+    publication_status: 'published',
+    is_published: true,
+    availability_status: 'made_to_order',
+    seo_title: 'Stainless Steel Commercial Coffee Cart | Vetri Fabs India',
+    seo_description: 'Food-grade stainless steel coffee vending cart with roller shutters, sink tap, and lockable storage.',
+    created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
+  },
+  {
+    id: 'ss-live-table-banquet',
+    name: 'The Live Table — Banquet Chef Counter',
+    title: 'The Live Table — Banquet Chef Counter',
+    slug: 'the-live-table-banquet-chef-counter',
+    category_id: 'stainless-steel',
+    category_name: 'Stainless Steel & Specialty Carts',
+    category_slug: 'stainless-steel',
+    short_description: 'Indoor live food preparation station featuring vintage Edison globe lighting, arched marquee, and mobile locking casters.',
+    full_description: 'Engineered specifically for luxury hotel banquets, wedding live counters, and high-end catering. Combines hygienic food-grade stainless steel prep tops with an elegant decorative archway fitted with warm Edison globes. Easily wheeled in and out of banquet ballrooms with whisper-quiet polyurethane swivel casters.',
+    primary_image: '/images/gallery/gallery-live-table-banquet.jpg',
+    image_url: '/images/gallery/gallery-live-table-banquet.jpg',
+    gallery_images: [
+      '/images/gallery/gallery-live-table-banquet.jpg',
+      '/images/products/ss-coffee-cart.jpg',
+      '/images/gallery/gallery-ss-tandoor-shawarma.jpg',
+    ],
+    gallery_urls: [
+      '/images/gallery/gallery-live-table-banquet.jpg',
+      '/images/products/ss-coffee-cart.jpg',
+      '/images/gallery/gallery-ss-tandoor-shawarma.jpg',
+    ],
+    pricing_type: 'starting',
+    price: null,
+    starting_price: 135000,
+    unit: 'per banquet counter',
+    sku: 'VF-SS-302',
+    specifications: [
+      { label: 'Counter Dimensions', value: '6 Ft Length x 2.8 Ft Width x 7.5 Ft Height' },
+      { label: 'Surface Top', value: '16-Gauge SS 304 Food-Grade Stainless Steel' },
+      { label: 'Archway', value: 'Wrought Iron / MS Arched Frame with Edison Bulbs' },
+      { label: 'Mobility', value: '4 Polyurethane Swivel Casters with Total-Lock Brakes' },
+    ],
+    features: [
+      'Stunning presentation for live dosa, pasta, waffle, and chaat counters',
+      'Whisper-quiet casters prevent floor scratches on hotel marble/carpets',
+      'Built-in surge-protected power strip for induction hobs and burners',
+    ],
+    featured: false,
+    is_featured: false,
+    publication_status: 'published',
+    is_published: true,
+    availability_status: 'made_to_order',
+    seo_title: 'Banquet Live Food Counter Fabrication | Vetri Fabs India',
+    seo_description: 'Custom mobile banquet live counters with Edison lighting, stainless surfaces, and luxury finishes.',
+    created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
+  },
+  {
+    id: 'ss-commercial-kitchen-unit',
+    name: 'SS Commercial Tandoor & Shawarma Station',
+    title: 'SS Commercial Tandoor & Shawarma Station',
+    slug: 'ss-commercial-tandoor-shawarma-station',
+    category_id: 'stainless-steel',
+    category_name: 'Stainless Steel & Specialty Carts',
+    category_slug: 'stainless-steel',
+    short_description: 'Food-grade stainless steel fabrication including built-in coal tandoor oven, dual gas burners, vertical shawarma donor grill, and sink.',
+    full_description: 'A heavy-duty integrated commercial kitchen module designed for heavy-duty commercial restaurant service. Houses a clay-lined stainless steel tandoor pot, dual cast-iron high-pressure gas burners, vertical motorized shawarma gyro rotisserie mount, and a dedicated handwash sink with drainage.',
+    primary_image: '/images/gallery/gallery-ss-tandoor-shawarma.jpg',
+    image_url: '/images/gallery/gallery-ss-tandoor-shawarma.jpg',
+    gallery_images: [
+      '/images/gallery/gallery-ss-tandoor-shawarma.jpg',
+      '/images/products/ss-coffee-cart.jpg',
+      '/images/engineering/truck-kitchen-interior.jpg',
+    ],
+    gallery_urls: [
+      '/images/gallery/gallery-ss-tandoor-shawarma.jpg',
+      '/images/products/ss-coffee-cart.jpg',
+      '/images/engineering/truck-kitchen-interior.jpg',
+    ],
+    pricing_type: 'starting',
+    price: null,
+    starting_price: 165000,
+    unit: 'per custom station',
+    sku: 'VF-SS-303',
+    specifications: [
+      { label: 'Material', value: '100% Food-Grade SS 304 (Heavy Gauge)' },
+      { label: 'Tandoor Housing', value: 'Insulated Clay Pot with Mineral Wool Blanket' },
+      { label: 'Burners', value: 'Dual Commercial High-Pressure Gas Burners (V1/V2)' },
+      { label: 'Rotisserie Mount', value: 'Heavy SS Spindle with Motor Provision' },
+    ],
+    features: [
+      'Full thermal isolation prevents heat transfer between tandoor and worktops',
+      'Integrated grease and oil drip trays for effortless end-of-day cleaning',
+      'Built to withstand continuous 14-hour daily restaurant usage',
+    ],
+    featured: false,
+    is_featured: false,
+    publication_status: 'published',
+    is_published: true,
+    availability_status: 'custom_fabrication',
+    seo_title: 'Commercial SS Tandoor & Shawarma Counter | Vetri Fabs India',
+    seo_description: 'Food-grade SS 304 kitchen counters with built-in tandoor pot, shawarma rotisserie, and burners.',
+    created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
+  },
+
+  // 5. Food and Ice Cream Carts
+  {
+    id: 'loop-neon-ice-cream-cart',
+    name: 'Loop Illuminated Ice Cream & Dessert Cart',
+    title: 'Loop Illuminated Ice Cream & Dessert Cart',
+    slug: 'loop-illuminated-ice-cream-dessert-cart',
+    category_id: 'food-ice-cream-carts',
+    category_name: 'Food and Ice Cream Carts',
+    category_slug: 'food-ice-cream-carts',
+    short_description: 'Modern corrugated metal mobile cart with glowing 3D neon logo, under-counter amber wash lighting, and caster base.',
+    full_description: 'Designed for gelato, artisanal ice creams, and trendy desserts. Built with a corrugated metal chassis, eye-catching 3D glowing neon logo, internal insulation cavity sized to house commercial chest freezers or gelato pans, and an amber ground wash light that draws foot traffic from afar.',
+    primary_image: '/images/gallery/gallery-loop-neon-cart.jpg',
+    image_url: '/images/gallery/gallery-loop-neon-cart.jpg',
+    gallery_images: [
+      '/images/gallery/gallery-loop-neon-cart.jpg',
+      '/images/products/illuminated-kiosk-cart.jpg',
+      '/images/gallery/gallery-crave-cartel.jpg',
+    ],
+    gallery_urls: [
+      '/images/gallery/gallery-loop-neon-cart.jpg',
+      '/images/products/illuminated-kiosk-cart.jpg',
+      '/images/gallery/gallery-crave-cartel.jpg',
+    ],
+    pricing_type: 'starting',
+    price: null,
+    starting_price: 98000,
+    unit: 'per cart',
+    sku: 'VF-IC-401',
+    specifications: [
+      { label: 'Dimensions', value: '5.5 Ft Length x 3.2 Ft Width x 6.5 Ft Height' },
+      { label: 'Freezer Bay', value: 'Accepts 200L to 300L Commercial Chest Freezers' },
+      { label: 'Lighting', value: 'Custom Neon Flex 3D Logo + Amber Underglow' },
+      { label: 'Body Finish', value: 'Industrial Matte Black Powder Coated Corrugation' },
+      { label: 'Mobility', value: '4 Heavy Caster Wheels (2 Swivel with Locks)' },
+    ],
+    features: [
+      'Pre-wired with heavy 16A supply line for continuous refrigeration',
+      'Curved sneeze guard glass shield protects toppings and scoops',
+      'Rear fold-down shelf for point-of-sale terminal and cup dispensers',
+    ],
+    featured: true,
+    is_featured: true,
+    publication_status: 'published',
+    is_published: true,
+    availability_status: 'made_to_order',
+    seo_title: 'Illuminated Ice Cream & Dessert Cart | Vetri Fabs India',
+    seo_description: 'Custom neon-illuminated mobile ice cream cart with freezer bay, sneeze guard, and caster wheels.',
+    created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
+  },
+  {
+    id: 'crave-cartel-dessert-cart',
+    name: 'Crave Cartel Overhead Water Tank Mobile Cart',
+    title: 'Crave Cartel Overhead Water Tank Mobile Cart',
+    slug: 'crave-cartel-overhead-water-tank-cart',
+    category_id: 'food-ice-cream-carts',
+    category_name: 'Food and Ice Cream Carts',
+    category_slug: 'food-ice-cream-carts',
+    short_description: 'Black mobile food kiosk equipped with an elevated rooftop water tank cage, perimeter halo lighting, and heavy transport wheels.',
+    full_description: 'An independent self-contained vending unit complete with an elevated rooftop gravity-fed water tank rack, 360-degree yellow perimeter lighting, and deep internal refrigeration bay for beverages, sodas, and ice cream cones. Engineered for parks, waterfronts, and festival grounds with zero municipal utility hookups.',
+    primary_image: '/images/gallery/gallery-crave-cartel.jpg',
+    image_url: '/images/gallery/gallery-crave-cartel.jpg',
+    gallery_images: [
+      '/images/gallery/gallery-crave-cartel.jpg',
+      '/images/gallery/gallery-loop-neon-cart.jpg',
+      '/images/products/green-mobile-cart.jpg',
+    ],
+    gallery_urls: [
+      '/images/gallery/gallery-crave-cartel.jpg',
+      '/images/gallery/gallery-loop-neon-cart.jpg',
+      '/images/products/green-mobile-cart.jpg',
+    ],
+    pricing_type: 'fixed',
+    price: 115000,
+    starting_price: null,
+    unit: 'per kiosk cart',
+    sku: 'VF-IC-402',
+    specifications: [
+      { label: 'Size', value: '6 Ft Length x 3.5 Ft Width x 7.5 Ft Height' },
+      { label: 'Water System', value: 'Elevated 100L Overhead Water Tank Rack' },
+      { label: 'Lighting', value: 'Perimeter Warm Halo LED Strips' },
+      { label: 'Countertop', value: 'Food-Grade Stainless Steel' },
+      { label: 'Wheels', value: 'Solid Rubber Wheels with Mud Guards' },
+    ],
+    features: [
+      'Self-contained water system allows fully independent operation anywhere',
+      'Dual lockable rear doors protect refrigeration units and stock',
+      'Custom branding fascia ready for digital print or neon signage',
+    ],
+    featured: false,
+    is_featured: false,
+    publication_status: 'published',
+    is_published: true,
+    availability_status: 'made_to_order',
+    seo_title: 'Self-Contained Mobile Dessert & Beverage Cart | Vetri Fabs India',
+    seo_description: 'Custom mobile beverage and ice cream cart with overhead water tank and stainless steel countertops.',
+    created_at: '2026-10-18T00:00:00Z',
+    updated_at: '2026-10-19T00:00:00Z',
   },
 ];
 
 /**
- * Helper query functions pre-wired for future Supabase client integration
+ * Filter and query functions designed to connect cleanly with Supabase
+ * or serve the local typed catalogue when offline/building.
  */
-export function getAllProducts(): Product[] {
-  return SAMPLE_PRODUCTS.filter((p) => p.is_published);
+export function getAllProducts(options?: ProductFilterOptions): Product[] {
+  let list = SAMPLE_PRODUCTS.filter((p) => p.publication_status === 'published' || p.is_published);
+
+  if (!options) return list;
+
+  if (options.categorySlug && options.categorySlug !== 'all') {
+    list = list.filter((p) => p.category_slug === options.categorySlug || p.category_id === options.categorySlug);
+  }
+
+  if (options.pricingType && options.pricingType !== 'all') {
+    list = list.filter((p) => p.pricing_type === options.pricingType);
+  }
+
+  if (options.searchQuery && options.searchQuery.trim() !== '') {
+    const q = options.searchQuery.toLowerCase().trim();
+    list = list.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.title.toLowerCase().includes(q) ||
+        p.short_description.toLowerCase().includes(q) ||
+        p.sku.toLowerCase().includes(q) ||
+        p.category_name.toLowerCase().includes(q) ||
+        p.specifications.some((s) => s.value.toLowerCase().includes(q))
+    );
+  }
+
+  if (options.sortBy) {
+    if (options.sortBy === 'name-asc') {
+      list.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (options.sortBy === 'name-desc') {
+      list.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (options.sortBy === 'price-asc') {
+      list.sort((a, b) => (a.price || a.starting_price || 9999999) - (b.price || b.starting_price || 9999999));
+    } else if (options.sortBy === 'price-desc') {
+      list.sort((a, b) => (b.price || b.starting_price || 0) - (a.price || a.starting_price || 0));
+    } else {
+      // featured first
+      list.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+    }
+  }
+
+  return list;
 }
 
 export function getFeaturedProducts(): Product[] {
-  return SAMPLE_PRODUCTS.filter((p) => p.is_published && p.is_featured);
+  return SAMPLE_PRODUCTS.filter(
+    (p) => (p.publication_status === 'published' || p.is_published) && (p.featured || p.is_featured)
+  );
 }
 
-export function getProductsByCategory(categoryId: string): Product[] {
+export function getProductsByCategory(categorySlug: string): Product[] {
   return SAMPLE_PRODUCTS.filter(
-    (p) => p.is_published && p.category_id === categoryId
+    (p) =>
+      (p.publication_status === 'published' || p.is_published) &&
+      (p.category_slug === categorySlug || p.category_id === categorySlug)
   );
 }
 
 export function getProductBySlug(slug: string): Product | undefined {
   return SAMPLE_PRODUCTS.find((p) => p.slug === slug);
+}
+
+export function getRelatedProducts(currentProductId: string, categoryId: string, limit = 3): Product[] {
+  return SAMPLE_PRODUCTS.filter(
+    (p) =>
+      (p.publication_status === 'published' || p.is_published) &&
+      p.id !== currentProductId &&
+      (p.category_id === categoryId || p.category_slug === categoryId)
+  ).slice(0, limit);
 }

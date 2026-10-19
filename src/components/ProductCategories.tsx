@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { CATEGORIES } from '@/data/categories';
 
@@ -23,7 +24,6 @@ export default function ProductCategories({ onSelectCategory }: ProductCategorie
   return (
     <section id="categories" className="py-16 md:py-24 bg-white border-y border-gray-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF5EC] text-[#0B3D24] text-xs font-bold uppercase tracking-wider mb-3">
@@ -33,20 +33,23 @@ export default function ProductCategories({ onSelectCategory }: ProductCategorie
             Explore Our Products
           </h2>
           <p className="mt-3 text-base sm:text-lg text-[#66716A]">
-            Customized mobile food solutions for different business needs.
+            Customized mobile food solutions engineered for different business requirements.
           </p>
         </div>
 
-        {/* 4-Category Responsive Grid */}
+        {/* Categories Responsive Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-6">
-          {CATEGORIES.map((cat) => (
+          {CATEGORIES.slice(0, 4).map((cat) => (
             <div
               key={cat.id}
               className="group bg-[#F7F9F7] rounded-2xl overflow-hidden border border-gray-200 hover:border-[#16803C]/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 {/* Product Photograph Container */}
-                <div className="relative aspect-[4/3] w-full bg-gray-100 overflow-hidden">
+                <Link
+                  href={`/products/${cat.slug}`}
+                  className="relative aspect-[4/3] w-full bg-gray-100 block overflow-hidden cursor-pointer"
+                >
                   <Image
                     src={cat.image_url}
                     alt={`${cat.name} by Vetri Fabs India`}
@@ -55,17 +58,19 @@ export default function ProductCategories({ onSelectCategory }: ProductCategorie
                     className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-                  
+
                   {/* Category Badge */}
                   <span className="absolute top-3 left-3 bg-[#0B3D24]/90 text-white text-[11px] font-semibold px-2.5 py-1 rounded-md backdrop-blur-xs shadow-xs">
                     {cat.name}
                   </span>
-                </div>
+                </Link>
 
                 {/* Content */}
                 <div className="p-5">
                   <h3 className="text-lg font-bold text-[#0B3D24] mb-2 group-hover:text-[#16803C] transition-colors">
-                    {cat.name}
+                    <Link href={`/products/${cat.slug}`}>
+                      {cat.name}
+                    </Link>
                   </h3>
                   <p className="text-xs sm:text-sm text-[#66716A] line-clamp-2 leading-relaxed mb-4">
                     {cat.description}
@@ -90,22 +95,40 @@ export default function ProductCategories({ onSelectCategory }: ProductCategorie
                 </div>
               </div>
 
-              {/* Action Link */}
-              <div className="px-5 pb-5 pt-2">
-                <button
-                  type="button"
-                  onClick={() => handleCategoryClick(cat.id)}
+              {/* Action Links */}
+              <div className="px-5 pb-5 pt-2 flex flex-col gap-2">
+                <Link
+                  href={`/products/${cat.slug}`}
                   className="w-full py-2.5 px-4 bg-white group-hover:bg-[#16803C] text-[#0B3D24] group-hover:text-white border border-gray-200 group-hover:border-[#16803C] rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center justify-between cursor-pointer shadow-2xs"
                 >
-                  <span>Explore Products</span>
+                  <span>View {cat.name}</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
+                </Link>
 
+                {onSelectCategory && (
+                  <button
+                    type="button"
+                    onClick={() => handleCategoryClick(cat.id)}
+                    className="text-[11px] font-semibold text-[#16803C] hover:underline text-center cursor-pointer py-1"
+                  >
+                    Quick Filter on Home &darr;
+                  </button>
+                )}
+              </div>
             </div>
           ))}
         </div>
 
+        {/* View All Catalogue CTA */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#16803C] hover:bg-[#0B3D24] text-white rounded-xl font-bold text-sm shadow-md hover:shadow-lg transition-all"
+          >
+            <span>Browse Full Product Catalogue (All Categories)</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     </section>
   );

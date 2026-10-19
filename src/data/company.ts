@@ -23,14 +23,48 @@ export const COMPANY_CONFIG: CompanyConfig = {
     country: 'India',
     isPlaceholder: true
   },
-  disclaimer: 'Product specifications and designs shown are manufactured custom examples by Vetri Fabs India. Final specifications, vehicle chassis choice, and equipment layout are tailored to individual client business requirements.'
+  disclaimer: 'Product specifications and designs shown are manufactured custom examples by Vetri Fabs India. Final specifications, vehicle chassis choice, and equipment layout are tailored to individual client business requirements.',
+  pricingDisclaimer: 'Prices shown are indicative base manufacturing estimates. Final quotation depends on chassis selection, equipment fitments, stainless steel gauge, internal electrical layout, and custom branding requirements.'
 };
 
 export const NAVIGATION_LINKS = [
-  { label: 'Home', href: '#home' },
-  { label: 'About Us', href: '#about-us' },
-  { label: 'Products', href: '#products' },
-  { label: 'Engineering', href: '#engineering' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'Contact Us', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Catalogue', href: '/products' },
+  { label: 'Categories', href: '/#categories' },
+  { label: 'Engineering', href: '/#engineering' },
+  { label: 'Gallery', href: '/#gallery' },
+  { label: 'Contact Us', href: '/#contact' },
 ];
+
+/**
+ * Format Indian currency correctly in INR (₹)
+ * Examples: 150000 -> ₹1,50,000
+ */
+export function formatINR(amount?: number | null): string {
+  if (amount === undefined || amount === null || isNaN(amount) || amount <= 0) {
+    return 'Request a Quote';
+  }
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+/**
+ * Build dynamic WhatsApp enquiry URL
+ */
+export function getWhatsAppEnquiryUrl(productName?: string, productUrl?: string): string {
+  if (!COMPANY_CONFIG.whatsappNumber) {
+    return '#';
+  }
+  let message = 'Hello Vetri Fabs India, I would like to enquire about your custom food carts and trucks.';
+  if (productName) {
+    message = `Hello Vetri Fabs India, I would like to enquire about the ${productName}.`;
+    if (productUrl) {
+      message += ` Product reference: ${productUrl}`;
+    }
+  }
+  return `https://wa.me/${COMPANY_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
+
