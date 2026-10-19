@@ -58,8 +58,9 @@ export const SAMPLE_PRODUCTS: Product[] = [
     publication_status: 'published',
     is_published: true,
     availability_status: 'custom_fabrication',
-    seo_title: 'Tata Ace Commercial Food Truck Fabrication | Vetri Fabs India',
-    seo_description: 'Custom heavy-duty food truck fabrication on Tata Ace HT chassis with high-roof body, stainless kitchen fitouts, and hydraulic flaps.',
+    seo_title: 'Tata Ace Food Truck Manufacturing in Chennai | Vetri Fabs India',
+    seo_description: 'Custom heavy-duty food truck manufacturing in Chennai on Tata Ace HT chassis. High-roof insulated body, stainless steel kitchen setup, and hydraulic canopies.',
+
     created_at: '2026-10-18T00:00:00Z',
     updated_at: '2026-10-19T00:00:00Z',
   },

@@ -56,13 +56,14 @@ export default function HeroSection() {
 
             {/* Single H1 Title */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-[#0B3D24] tracking-tight leading-[1.15] mb-5">
-              Custom Food Carts, Trucks & Vans Built for Your Business
+              Food Truck Manufacturing & Custom Mobile Carts in Chennai
             </h1>
 
             {/* Supporting Description */}
             <p className="text-base sm:text-lg text-[#66716A] leading-relaxed mb-8 max-w-2xl font-normal">
-              Explore customized food carts, mobile food trucks, food vans, and stainless-steel solutions designed around your business requirements. Heavy-gauge frames, food-grade prep counters, and bespoke commercial vehicle conversions.
+              Vetri Fabs India is Chennai’s premier commercial food truck manufacturer and vehicle body fabricator. We specialize in high-roof Tata Ace food trucks, enclosed 10x6 mobile food vans, and food-grade stainless steel kitchen carts tailored to your business needs.
             </p>
+
 
             {/* Action CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-10">

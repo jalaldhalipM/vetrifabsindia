@@ -26,8 +26,9 @@ export const CATEGORIES: Category[] = [
     examples: ['Food Trucks on Tata Ace', 'Food Cart Trolleys', 'Customized Commercial Food Vehicles', 'Shawarma & Pizza Trucks'],
     featured: true,
     order_index: 2,
-    seo_title: 'Custom Commercial Food Trucks & Vehicle Fabrication | Vetri Fabs India',
-    seo_description: 'Commercial food truck conversions on Tata Ace & light commercial chassis with custom high-roofs, hydraulic canopies, and full kitchen fitouts.',
+    seo_title: 'Food Truck Manufacturing in Chennai | Commercial Food Truck Fabrication | Vetri Fabs India',
+    seo_description: 'Premier food truck manufacturing company in Chennai, Tamil Nadu. Custom Tata Ace conversions, Mahindra Bolero food trucks, and commercial mobile kitchens.',
+
   },
   {
     id: 'food-vans',
