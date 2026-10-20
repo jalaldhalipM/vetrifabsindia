@@ -28,17 +28,27 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
+    // Don't run auth check on the login page itself
+    if (pathname === '/admin/login') {
+      setChecking(false);
+      return;
+    }
     if (!isAdminLoggedIn()) {
       router.replace('/admin/login');
     } else {
       setChecking(false);
     }
-  }, [router]);
+  }, [router, pathname]);
 
   const logout = useCallback(() => {
     adminLogout();
     router.push('/admin/login');
   }, [router]);
+
+  // Render login page without sidebar/layout wrapper
+  if (pathname === '/admin/login') {
+    return <>{children}</>;
+  }
 
   if (checking) {
     return (
@@ -47,6 +57,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </div>
     );
   }
+
 
   return (
     <div className="flex min-h-screen" style={{ background: 'linear-gradient(135deg, #0a1f10 0%, #050d08 100%)' }}>
