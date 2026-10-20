@@ -1,15 +1,12 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { MessageSquare, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { COMPANY_CONFIG } from '@/data/company';
+import { getWhatsAppEnquiryUrl } from '@/data/company';
+
 
 export default function CustomizationCTA() {
-  const scrollToContact = () => {
-    const el = document.querySelector('#contact');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section className="relative py-16 md:py-20 bg-[#0B3D24] text-white overflow-hidden">
       {/* Background subtle geometry */}
@@ -27,27 +24,24 @@ export default function CustomizationCTA() {
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4 leading-tight">
-            Looking for a Food Cart Designed for Your Business?
+            Looking for a Food Cart or Truck Designed for Your Business?
           </h2>
 
           <p className="text-base sm:text-lg text-emerald-100/90 leading-relaxed mb-8">
-            Tell us what you need. Our team can help you explore suitable food cart, truck, and van options tailored to your menu, location, and equipment.
+            Tell us what you need. Our engineering team in Chennai helps you customize the ideal food cart, truck, and van tailored to your menu, location, and equipment.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              type="button"
-              onClick={scrollToContact}
+            <Link
+              href="/contact"
               className="w-full sm:w-auto bg-[#16803C] hover:bg-[#126630] text-white font-semibold text-base px-8 py-3.5 rounded-xl shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer active:scale-95 border border-emerald-400/20"
             >
               <span>Discuss Your Requirements</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </button>
+            </Link>
 
             <a
-              href={`https://wa.me/${COMPANY_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                'Hello Vetri Fabs India, I would like to discuss my custom food cart requirements.'
-              )}`}
+              href={getWhatsAppEnquiryUrl('Customization Discussion')}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-semibold text-base px-6 py-3.5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 border border-white/20"

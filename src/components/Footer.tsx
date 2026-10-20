@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { MessageSquare, Phone, Mail, ArrowUp } from 'lucide-react';
+import { MessageSquare, Phone, Mail, ArrowUp, Lock } from 'lucide-react';
 import { COMPANY_CONFIG, NAVIGATION_LINKS, getWhatsAppEnquiryUrl } from '@/data/company';
 import { CATEGORIES } from '@/data/categories';
 
@@ -34,24 +34,21 @@ export default function Footer() {
             </Link>
 
             <p className="text-xs sm:text-sm text-emerald-100/80 leading-relaxed mb-5">
-              Manufacturer of customized food carts, mobile food trucks, high-roof food vans, and food-grade stainless-steel commercial setups based in Chennai, India.
+              Premier manufacturer of customized food trucks, mobile push carts, walk-in high-roof food vans, and commercial stainless steel kitchen fabrication based in Chennai, India.
             </p>
 
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs text-emerald-200/80">
-              <span className="font-semibold text-white block mb-0.5">Custom Fabrication Workshop:</span>
+            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs text-emerald-200/80">
+              <span className="font-semibold text-white block mb-0.5">Manufacturing Workshop & Factory:</span>
               <span>{COMPANY_CONFIG.address.area}, {COMPANY_CONFIG.address.city}, Tamil Nadu</span>
-              <span className="text-[10px] text-amber-300 block mt-1">
-                * Official registered address subject to client verification
-              </span>
             </div>
           </div>
 
           {/* Col 2: Quick Links (2 cols) */}
           <div className="lg:col-span-2">
             <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-4">
-              Quick Navigation
+              Navigation
             </h4>
-            <ul className="space-y-2 text-xs sm:text-sm">
+            <ul className="space-y-2.5 text-xs sm:text-sm">
               {NAVIGATION_LINKS.map((link) => (
                 <li key={link.label}>
                   <Link
@@ -68,9 +65,9 @@ export default function Footer() {
           {/* Col 3: Product Categories (3 cols) */}
           <div className="lg:col-span-3">
             <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-4">
-              Product Categories
+              Catalogue Categories
             </h4>
-            <ul className="space-y-2 text-xs sm:text-sm">
+            <ul className="space-y-2.5 text-xs sm:text-sm">
               {CATEGORIES.map((cat) => (
                 <li key={cat.id}>
                   <Link
@@ -83,10 +80,10 @@ export default function Footer() {
               ))}
               <li>
                 <Link
-                  href="/#engineering"
+                  href="/about"
                   className="text-emerald-400 hover:text-white transition-colors block py-0.5 font-medium"
                 >
-                  Exploded View Specs &rarr;
+                  Our Workshop & Standards &rarr;
                 </Link>
               </li>
             </ul>
@@ -95,7 +92,7 @@ export default function Footer() {
           {/* Col 4: Contact & Direct Inquiries (3 cols) */}
           <div className="lg:col-span-3">
             <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-4">
-              Connect With Us
+              Direct Contact
             </h4>
             
             <div className="space-y-3 text-xs text-emerald-100/80">
@@ -103,25 +100,27 @@ export default function Footer() {
                 href={getWhatsAppEnquiryUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-[#16803C] hover:bg-[#136e34] text-white font-semibold flex items-center justify-center gap-2 transition-colors"
+                className="p-3 rounded-xl bg-[#16803C] hover:bg-[#136e34] text-white font-bold flex items-center justify-center gap-2 transition-colors shadow-sm"
               >
                 <MessageSquare className="w-4 h-4 text-emerald-300" />
-                <span>WhatsApp Enquiry</span>
+                <span>Chat on WhatsApp</span>
               </a>
 
-              <div className="flex items-center gap-2 pt-1 text-[11px]">
-                <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <div className="flex items-center gap-2 pt-1 text-xs">
+                <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>{COMPANY_CONFIG.displayPhone}</span>
               </div>
 
-              <div className="flex items-center gap-2 text-[11px]">
-                <Mail className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <div className="flex items-center gap-2 text-xs">
+                <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span className="truncate">{COMPANY_CONFIG.email}</span>
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-white/10 text-[10px] text-emerald-300/70">
-              <span>* Configurable contact placeholders awaiting Vetri Fabs official sign-off.</span>
+            <div className="mt-4 pt-3 border-t border-white/10 text-[11px] text-emerald-300/80">
+              <Link href="/contact" className="hover:underline flex items-center gap-1 text-emerald-300 font-semibold">
+                <span>View Full Contact & Location &rarr;</span>
+              </Link>
             </div>
           </div>
 
@@ -132,19 +131,32 @@ export default function Footer() {
           <div className="text-center sm:text-left">
             <p>© 2026 Vetri Fabs India. All rights reserved.</p>
             <p className="text-[11px] text-emerald-300/60 mt-0.5">
-              Custom Food Carts, Mobile Food Trucks & Commercial Vehicle Body Fabrications.
+              Custom Commercial Food Trucks, Food Vans & Stainless Steel Fabrications.
             </p>
           </div>
 
-          <button
-            type="button"
-            onClick={scrollToTop}
-            aria-label="Scroll back to top"
-            className="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
-          >
-            <span>Back to top</span>
-            <ArrowUp className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-3">
+            {/* Admin Lock Icon */}
+            <Link
+              href="/admin/login"
+              aria-label="Admin Panel"
+              title="Admin Login"
+              className="p-2.5 rounded-xl transition-all duration-200 group"
+              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}
+            >
+              <Lock className="w-3.5 h-3.5 text-emerald-300/40 group-hover:text-emerald-400 transition-colors" />
+            </Link>
+
+            <button
+              type="button"
+              onClick={scrollToTop}
+              aria-label="Scroll back to top"
+              className="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
+            >
+              <span>Back to top</span>
+              <ArrowUp className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
       </div>

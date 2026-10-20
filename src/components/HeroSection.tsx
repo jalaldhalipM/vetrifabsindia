@@ -2,7 +2,9 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { ArrowRight, FileText, CheckCircle2, Shield, MapPin } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, CheckCircle2, Shield, MapPin, Building2 } from 'lucide-react';
+
 
 const HERO_IMAGES = [
   {
@@ -25,12 +27,8 @@ const HERO_IMAGES = [
 export default function HeroSection() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const scrollToSection = (id: string) => {
-    const el = document.querySelector(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
+
     <section
       id="home"
       className="relative pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-40 lg:pb-28 overflow-hidden bg-gradient-to-b from-[#EAF5EC]/70 via-[#F7F9F7] to-[#F7F9F7]"
@@ -67,26 +65,25 @@ export default function HeroSection() {
 
             {/* Action CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-10">
-              <button
-                type="button"
+              <Link
+                href="/products"
                 id="hero-explore-products-btn"
-                onClick={() => scrollToSection('#products')}
                 className="bg-[#16803C] hover:bg-[#0B3D24] text-white font-semibold text-base px-7 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer"
               >
-                <span>Explore Our Products</span>
+                <span>Explore Full Catalogue</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </button>
+              </Link>
 
-              <button
-                type="button"
-                id="hero-request-quote-btn"
-                onClick={() => scrollToSection('#contact')}
+              <Link
+                href="/about"
+                id="hero-about-us-btn"
                 className="bg-white hover:bg-[#EAF5EC] text-[#0B3D24] border-2 border-[#16803C]/40 hover:border-[#16803C] font-semibold text-base px-6 py-3.5 rounded-xl shadow-xs transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
               >
-                <FileText className="w-4 h-4 text-[#16803C]" />
-                <span>Request a Quote</span>
-              </button>
+                <Building2 className="w-4 h-4 text-[#16803C]" />
+                <span>About Our Workshop</span>
+              </Link>
             </div>
+
 
             {/* Value Highlights */}
             <div className="pt-6 border-t border-gray-200/80 grid grid-cols-3 gap-3 sm:gap-6">
@@ -185,13 +182,13 @@ export default function HeroSection() {
                     <Shield className="w-3.5 h-3.5 text-[#16803C]" />
                     Authentic Vetri Fabs Fabrication
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => scrollToSection('#gallery')}
+                  <Link
+                    href="/gallery"
                     className="text-[#16803C] hover:underline font-semibold"
                   >
                     View All Photos &rarr;
-                  </button>
+                  </Link>
+
                 </div>
 
               </div>

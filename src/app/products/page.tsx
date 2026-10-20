@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
@@ -8,6 +8,8 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import QuoteModal from '@/components/QuoteModal';
 import { CATEGORIES } from '@/data/categories';
 import { getAllProducts } from '@/data/products';
+import { getAdminProducts, initProductsIfEmpty } from '@/lib/adminStore';
+import { Product } from '@/types';
 import { Search, SlidersHorizontal, RotateCcw, AlertCircle, Sparkles } from 'lucide-react';
 
 
@@ -23,8 +25,13 @@ export default function ProductsPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [selectedProductForQuote, setSelectedProductForQuote] = useState<string>('General Catalogue Enquiry');
 
-  const allProducts = useMemo(() => {
-    return getAllProducts();
+  const [allProducts, setAllProducts] = useState<Product[]>(() => getAllProducts());
+
+  useEffect(() => {
+    initProductsIfEmpty();
+    const stored = getAdminProducts();
+    const published = stored.filter((p) => p.publication_status === 'published' || p.is_published);
+    if (published.length > 0) setAllProducts(published);
   }, []);
 
   // Filter and sort products
@@ -102,7 +109,8 @@ export default function ProductsPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F7F9F7]">
-      <Header onOpenQuoteModal={() => handleOpenQuote('General Catalogue Enquiry')} />
+      <Header />
+
 
       <main className="flex-1 pt-24 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

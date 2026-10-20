@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import ProductCard from './ProductCard';
 import ProductModal from './ProductModal';
 import { SAMPLE_PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
+import { getAdminProducts, initProductsIfEmpty } from '@/lib/adminStore';
 import { Sparkles, ArrowRight } from 'lucide-react';
 
 
@@ -34,6 +35,14 @@ export default function FeaturedProducts({
   const [activeTab, setActiveTab] = useState(selectedCategoryFilter);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [catalogueProducts, setCatalogueProducts] = useState<Product[]>(SAMPLE_PRODUCTS);
+
+  useEffect(() => {
+    initProductsIfEmpty();
+    const stored = getAdminProducts();
+    const published = stored.filter((p) => p.publication_status === 'published' || p.is_published);
+    if (published.length > 0) setCatalogueProducts(published);
+  }, []);
 
   const handleTabChange = (tabId: string) => {
     setActiveTab(tabId);
@@ -41,8 +50,8 @@ export default function FeaturedProducts({
   };
 
   const filteredProducts = activeTab === 'all'
-    ? SAMPLE_PRODUCTS
-    : SAMPLE_PRODUCTS.filter((p) => p.category_id === activeTab);
+    ? catalogueProducts
+    : catalogueProducts.filter((p) => p.category_id === activeTab);
 
   const handleViewDetails = (product: Product) => {
     setSelectedProduct(product);

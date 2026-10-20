@@ -2,8 +2,10 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { GALLERY_ITEMS } from '@/data/gallery';
-import { Camera, ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Camera, ZoomIn, X, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+
 
 const FILTER_CATEGORIES = [
   'All',
@@ -60,12 +62,20 @@ export default function GalleryPreview() {
             </p>
           </div>
 
-          <div className="mt-4 md:mt-0">
+          <div className="mt-4 md:mt-0 flex items-center gap-3">
             <span className="text-xs text-[#66716A]">
-              Showing <strong className="text-[#0B3D24]">{filteredItems.length}</strong> verified project photos
+              Showing <strong className="text-[#0B3D24]">{filteredItems.length}</strong> photos
             </span>
+            <Link
+              href="/gallery"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#16803C] hover:text-[#0B3D24] bg-[#F7F9F7] hover:bg-[#EAF5EC] px-3.5 py-1.5 rounded-lg border border-gray-200 transition-colors shadow-2xs"
+            >
+              <span>View Full Gallery Page</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
+
 
         {/* Gallery Filter Pills */}
         <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">

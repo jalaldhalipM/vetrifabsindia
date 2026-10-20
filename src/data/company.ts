@@ -29,12 +29,12 @@ export const COMPANY_CONFIG: CompanyConfig = {
 
 export const NAVIGATION_LINKS = [
   { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
   { label: 'Catalogue', href: '/products' },
-  { label: 'Categories', href: '/#categories' },
-  { label: 'Engineering', href: '/#engineering' },
-  { label: 'Gallery', href: '/#gallery' },
-  { label: 'Contact Us', href: '/#contact' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Contact Us', href: '/contact' },
 ];
+
 
 /**
  * Format Indian currency correctly in INR (₹)

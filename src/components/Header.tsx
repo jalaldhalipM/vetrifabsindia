@@ -2,20 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, MessageSquare, ChevronRight } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { Menu, X, MessageSquare } from 'lucide-react';
 import { NAVIGATION_LINKS, getWhatsAppEnquiryUrl } from '@/data/company';
 
+export default function Header() {
 
-interface HeaderProps {
-  onOpenQuoteModal?: (productName?: string) => void;
-}
 
-export default function Header({ onOpenQuoteModal }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,37 +20,6 @@ export default function Header({ onOpenQuoteModal }: HeaderProps) {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleNavClick = (href: string, e?: React.MouseEvent) => {
-    setMobileMenuOpen(false);
-
-    // If it's an anchor hash or root anchor
-    if (href.startsWith('/#') || href.startsWith('#')) {
-      const hash = href.replace('/#', '#');
-      if (pathname === '/') {
-        if (e) e.preventDefault();
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      } else {
-        // Navigate back to homepage anchor
-        router.push(href);
-      }
-    }
-  };
-
-  const handleQuoteClick = (e: React.MouseEvent) => {
-    if (onOpenQuoteModal) {
-      e.preventDefault();
-      onOpenQuoteModal();
-    } else if (pathname === '/') {
-      e.preventDefault();
-      handleNavClick('/#contact');
-    } else {
-      router.push('/#contact');
-    }
-  };
 
   return (
     <header
@@ -89,30 +54,15 @@ export default function Header({ onOpenQuoteModal }: HeaderProps) {
           <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
             {NAVIGATION_LINKS.map((link) => {
               const isCurrent =
-                link.href === '/products'
-                  ? pathname.startsWith('/products')
-                  : link.href === '/'
+                link.href === '/'
                   ? pathname === '/'
-                  : false;
-
-              if (link.href.startsWith('/#') || link.href.startsWith('#')) {
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(link.href, e)}
-                    className="px-3 py-2 text-sm font-semibold text-[#202923] hover:text-[#16803C] rounded-md transition-colors hover:bg-[#EAF5EC]/60"
-                  >
-                    {link.label}
-                  </a>
-                );
-              }
+                  : pathname.startsWith(link.href);
 
               return (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={`px-3 py-2 text-sm font-semibold rounded-md transition-colors ${
+                  className={`px-3.5 py-2 text-sm font-semibold rounded-lg transition-colors ${
                     isCurrent
                       ? 'text-[#16803C] bg-[#EAF5EC]'
                       : 'text-[#202923] hover:text-[#16803C] hover:bg-[#EAF5EC]/60'
@@ -124,39 +74,32 @@ export default function Header({ onOpenQuoteModal }: HeaderProps) {
             })}
           </nav>
 
-          {/* Desktop Right CTA */}
+          {/* Desktop Right: WhatsApp Direct Chat */}
           <div className="hidden md:flex items-center space-x-3">
             <a
               href={getWhatsAppEnquiryUrl()}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Direct WhatsApp Enquiry"
-              className="p-2 text-[#16803C] hover:bg-[#EAF5EC] rounded-lg transition-colors border border-[#16803C]/30 flex items-center gap-1.5 text-xs font-semibold"
+              className="px-3.5 py-2 text-[#0B3D24] bg-[#EAF5EC] hover:bg-[#d8edd9] rounded-xl transition-all border border-[#16803C]/30 flex items-center gap-2 text-xs font-bold shadow-2xs hover:shadow-xs active:scale-95"
               title="Quick WhatsApp Chat"
             >
               <MessageSquare className="w-4 h-4 text-[#16803C]" />
-              <span className="hidden xl:inline">WhatsApp</span>
+              <span>WhatsApp Chat</span>
             </a>
-
-            <button
-              type="button"
-              onClick={handleQuoteClick}
-              className="bg-[#16803C] hover:bg-[#0B3D24] text-white font-semibold text-sm px-5 py-2.5 rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-1.5 active:scale-95 cursor-pointer"
-            >
-              <span>Get a Quote</span>
-              <ChevronRight className="w-4 h-4" />
-            </button>
           </div>
 
-          {/* Mobile Hamburger Button */}
+          {/* Mobile Hamburger & WhatsApp Button */}
           <div className="flex md:hidden items-center space-x-2">
-            <button
-              type="button"
-              onClick={handleQuoteClick}
-              className="bg-[#16803C] text-white font-medium text-xs px-3 py-1.5 rounded-md"
+            <a
+              href={getWhatsAppEnquiryUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="p-2 text-[#16803C] bg-[#EAF5EC] rounded-lg border border-[#16803C]/20"
             >
-              Quote
-            </button>
+              <MessageSquare className="w-5 h-5" />
+            </a>
             <button
               type="button"
               id="mobile-menu-toggle"
@@ -179,24 +122,21 @@ export default function Header({ onOpenQuoteModal }: HeaderProps) {
         >
           <div className="flex flex-col space-y-2">
             {NAVIGATION_LINKS.map((link) => {
-              if (link.href.startsWith('/#') || link.href.startsWith('#')) {
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(link.href, e)}
-                    className="px-3 py-2.5 rounded-md text-base font-semibold text-[#202923] hover:text-[#16803C] hover:bg-[#EAF5EC] transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                );
-              }
+              const isCurrent =
+                link.href === '/'
+                  ? pathname === '/'
+                  : pathname.startsWith(link.href);
+
               return (
                 <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2.5 rounded-md text-base font-semibold text-[#202923] hover:text-[#16803C] hover:bg-[#EAF5EC] transition-colors"
+                  className={`px-3.5 py-2.5 rounded-xl text-base font-semibold transition-colors ${
+                    isCurrent
+                      ? 'text-[#16803C] bg-[#EAF5EC]'
+                      : 'text-[#202923] hover:text-[#16803C] hover:bg-[#EAF5EC]'
+                  }`}
                 >
                   {link.label}
                 </Link>
@@ -204,22 +144,13 @@ export default function Header({ onOpenQuoteModal }: HeaderProps) {
             })}
 
             <div className="pt-4 border-t border-gray-100 flex flex-col gap-2.5">
-              <button
-                type="button"
-                onClick={handleQuoteClick}
-                className="w-full bg-[#16803C] hover:bg-[#0B3D24] text-white font-semibold text-center py-3 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <span>Request a Quote</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-
               <a
                 href={getWhatsAppEnquiryUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-[#EAF5EC] hover:bg-[#d8edd9] text-[#0B3D24] font-semibold text-center py-2.5 rounded-lg border border-[#16803C]/30 transition-colors flex items-center justify-center gap-2 text-sm"
+                className="w-full bg-[#16803C] hover:bg-[#0B3D24] text-white font-semibold text-center py-3 rounded-xl shadow-sm transition-colors flex items-center justify-center gap-2 text-sm"
               >
-                <MessageSquare className="w-4 h-4 text-[#16803C]" />
+                <MessageSquare className="w-4 h-4 text-emerald-300" />
                 <span>Chat on WhatsApp</span>
               </a>
             </div>
